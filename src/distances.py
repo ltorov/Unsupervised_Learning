@@ -1,6 +1,6 @@
 import numpy as np
 import itertools
-from clusters import boxes
+from src.clusters import boxes
 
 def euclidean(data: np.ndarray) -> np.ndarray:
     """
