@@ -12,11 +12,6 @@ I just used a template for ChatGPT haven't really worked on it yet
 - [Methods](#methods)
   - [read(path)](#readpath)
   - [normalize(data)](#normalizedata)
-  - [create_virtual_environment(venv_name)](#create_virtual_environmentvenv_name)
-  - [activate_virtual_environment(venv_name)](#activate_virtual_environmentvenv_name)
-  - [install_requirements()](#install_requirements)
-  - [deactivate_virtual_environment()](#deactivate_virtual_environment)
-  - [main(path, plotting=True, metric='euclidean')](#mainpath-plotting-truemetric-euclidean)
 - [Examples](#examples)
 - [Contributing](#contributing)
 - [License](#license)
@@ -112,27 +107,6 @@ Normalizes a NumPy array by scaling values between 0 and 1.
 - Returns:
   - numpy.ndarray: The normalized data.
 
-### `create_virtual_environment(venv_name: str)`
-
-Creates a virtual environment.
-
-- Parameters:
-  - `venv_name` (str): The name of the virtual environment.
-
-### `activate_virtual_environment(venv_name: str)`
-
-Activates a virtual environment.
-
-- Parameters:
-  - `venv_name` (str): The name of the virtual environment.
-
-### `install_requirements()`
-
-Installs required Python packages specified in the `requirements/requirements.txt` file.
-
-### `deactivate_virtual_environment()`
-
-Deactivates the virtual environment.
 
 ### `main(path: str, plotting: bool = True, metric: str = 'euclidean')`
 
