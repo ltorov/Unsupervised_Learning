@@ -15,8 +15,16 @@ def grid(dim: int, size: float, a: float = 0, b: float = 1) -> np.ndarray:
     Returns:
         numpy.ndarray: A grid of points.
     """
+    
     n = int((b-a)/(size) + 1)
     return np.array(list(itertools.product(np.linspace(a,b,n), repeat = dim)))
+
+def similarity_index(clusters: dict, target_clusters: dict) -> dict:
+    similarities = {}
+    for key, target_cluster in target_clusters.items():
+        max_similarity = max((len(np.intersect1d(cluster, target_cluster))/len(target_cluster), key) for key, cluster in clusters.items())
+        similarities[key] = max_similarity
+    return similarities
 
 def boxes(D: np.ndarray, div: int = 4) -> Dict[str, List[List[float]]]:
     """
