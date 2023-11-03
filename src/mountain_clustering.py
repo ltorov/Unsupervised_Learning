@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import griddata
+from plotting import scatter_to_surface
 
 
 
@@ -119,30 +120,6 @@ class MountainClustering:
 
         return clusters
     
-    def scatter_to_surface(x, y, z, title = "Surface plot", xlabel = 'X Axis',  ylabel = 'Y Axis', zlabel = 'Z Axis'):
-        # Create a 3D figure
-        fig = plt.figure()
-        ax = fig.add_subplot(111, projection='3d')
-
-        # Define the grid for interpolation
-        xi, yi = np.meshgrid(np.linspace(min(x), max(x), 100), np.linspace(min(y), max(y), 100))
-
-        # Interpolate Z-values to create a surface
-        zi = griddata((x, y), z, (xi, yi), method='cubic')
-
-        # Create the surface plot
-        ax.plot_surface(xi, yi, zi, cmap='viridis')
-
-        # Set labels for the axes
-        ax.set_xlabel(xlabel)
-        ax.set_ylabel(ylabel)
-        ax.set_zlabel(zlabel)
-
-        # Set title
-        plt.title(title)
-
-        # Show the plot
-        plt.show()
 
     def cluster(self, data: np.array, G: np.array) -> dict:
         """
@@ -157,7 +134,7 @@ class MountainClustering:
         """
         center, mv = self.select_center(data, G)
         self.centers.append(center)
-        # self.scatter_to_surface(G[:, 0], G[:, 1], mv)
+        scatter_to_surface(G[:, 0], G[:, 1], mv, title = "Mountain Function")
         iteration_count = 0
 
         while True and iteration_count < self.max_iterations:
@@ -166,7 +143,7 @@ class MountainClustering:
                 break
             else:
                 self.centers.append(center)
-                # self.scatter_to_surface(G[:, 0], G[:, 1], mv)
+                scatter_to_surface(G[:, 0], G[:, 1], mv, title = "Mountain Function revised without center "+str(center))
             iteration_count += 1
 
         clusters = self.assign_to_centers(data, G, self.centers, sigma=self.sigma)
