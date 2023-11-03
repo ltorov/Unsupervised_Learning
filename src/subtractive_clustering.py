@@ -18,14 +18,12 @@ class SubtractiveClustering:
         self.max_iterations = max_iterations
         self.centers = centers if centers else []
 
-    @staticmethod
-    def density_measure(data: np.array, alpha_radius: float) -> np.array:
+    def density_measure(self, data: np.array) -> np.array:
         """
         Compute the density measure for data points and grid points.
 
         Args:
             data (np.array): Data points.
-            alpha_radius (float): alpha_radius parameter for the mountain function.
 
         Returns:
             np.array: Array of density values for each grid point.
@@ -34,12 +32,11 @@ class SubtractiveClustering:
         for xi in data:
             Di = 0
             for xj in data:
-                Di += np.exp(-(np.linalg.norm(xi - xj) ** 2) / ((alpha_radius/2) ** 2))
+                Di += np.exp(-(np.linalg.norm(xi - xj) ** 2) / ((self.alpha_radius/2) ** 2))
             D.append(Di)
         return np.array(D)
 
-    @staticmethod
-    def new_density_measure(data: np.array, D: np.array, center: int, beta_radius: float) -> np.array:
+    def new_density_measure(self, data: np.array, D: np.array, center: int) -> np.array:
         """
         Compute the new density measure based on an existing mountain function.
 
@@ -47,14 +44,13 @@ class SubtractiveClustering:
             data (np.array): Data points.
             D (np.array): Existing density measures.
             center (int): Index of the current center.
-            beta_radius (float): beta_radius parameter for the revised density measure.
 
         Returns:
             np.array: Array of revised density measures.
         """
         Dci = []
         for i, xi in enumerate(data):
-            Dci.append(D[i] - D[center] * np.exp(-(np.linalg.norm(xi - data[center]) ** 2) / ((beta_radius/2) ** 2)))
+            Dci.append(D[i] - D[center] * np.exp(-(np.linalg.norm(xi - data[center]) ** 2) / ((self.beta_radius/2) ** 2)))
         return np.array(Dci)
 
     def select_center(self, data: np.array) -> (int, np.array):
@@ -68,7 +64,7 @@ class SubtractiveClustering:
             int: Index of the selected center.
             np.array: Density values for all data points.
         """
-        D = self.density_measure(data, alpha_radius=self.alpha_radius)
+        D = self.density_measure(data)
         max_density_measure = [np.max(D), np.argmax(D)]
         return max_density_measure[1], D
 
@@ -84,7 +80,7 @@ class SubtractiveClustering:
             int: Index of the new center.
             np.array: New density measures.
         """
-        D_new = self.new_density_measure(data, D, center, beta_radius=self.beta_radius)
+        D_new = self.new_density_measure(data, D, center)
         return np.argmax(D_new), D_new
 
     def assign_to_centers(self, data: np.array) -> np.array:
