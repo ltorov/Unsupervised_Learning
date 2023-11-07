@@ -4,6 +4,21 @@ import seaborn as sns
 import os
 import warnings
 from scipy.interpolate import griddata
+from babyplots import Babyplot
+
+def immersive_scatter(data, clusters, axis= [0,1,2], colors = "YlGnBu", xlabel = "X", ylabel = "Y", zlabel = "Z"):
+    points = [clusters[cluster]['points'] for cluster in clusters.keys()]
+    targets = [i for n in range(len(data)) for i in range(len(points)) if n in points[i]]
+    data = data[:, axis]
+    
+    # create the babyplots visualization
+    bp = Babyplot()
+    bp.add_plot(data, "shapeCloud", "categories", targets, {"shape": "sphere",
+                                                                    "colorScale": colors,
+                                                                    "showAxes": [True, True, True],
+                                                                    "axisLabels": [xlabel, ylabel, zlabel]})
+    # show the visualization
+    return bp
 
 # Function to save the plot to the "results" folder
 def save_plot(plt, title, folder="results", file_format="png"):
@@ -116,7 +131,10 @@ def surface(D, title= 'Surface plot of Distance Matrix'):
     # Save plot to results folder
     save_plot(plt, title)
 
-def plot_data_by_clusters_3d(data, clusters, title = "Clusters", palette="viridis", x_label='X', y_label='Y',
+
+
+
+def scatter_clusters(data, clusters, title = "Clusters", palette="YlGnBu", x_label='X', y_label='Y',
                              z_label='Z', axis = [0,1,2], return_figure=False):
     """
     Create a 3D scatter plot of data points with different clusters using Matplotlib.
@@ -124,7 +142,7 @@ def plot_data_by_clusters_3d(data, clusters, title = "Clusters", palette="viridi
     Parameters:
         data (numpy.ndarray): Data points with three columns (x, y, z).
         clusters (dict): A dictionary where keys are cluster labels and values are lists of indices in each cluster.
-        palette (str): Color palette for clusters (e.g., "viridis", "coolwarm", "Blues").
+        palette (str): Color palette for clusters.
         x_label (str): Label for the x-axis.
         y_label (str): Label for the y-axis.
         z_label (str): Label for the z-axis.
@@ -143,9 +161,11 @@ def plot_data_by_clusters_3d(data, clusters, title = "Clusters", palette="viridi
     ax = fig.add_subplot(111, projection='3d')
 
     colors = sns.color_palette(palette, len(clusters))
+    points = [clusters[cluster]['points'] for cluster in clusters.keys()]
 
-    for id_color, (cluster_label, cluster_indices) in enumerate(clusters.items()):
-        ax.scatter(data[cluster_indices, axis[0]], data[cluster_indices, axis[1]], data[cluster_indices, axis[2]], color=colors[id_color], marker='o', label=id_color)
+    for id_color, point in enumerate(points):
+
+        ax.scatter(data[point][:, axis[0]], data[point][:, axis[1]], data[point][:, axis[2]], color=colors[id_color], marker='o', label=id_color)
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
     ax.set_zlabel(z_label)
@@ -160,7 +180,9 @@ def plot_data_by_clusters_3d(data, clusters, title = "Clusters", palette="viridi
     # Restore warnings to their default behavior
     warnings.resetwarnings()
 
-def scatter_to_surface(x, y, z, title = "Surface plot", xlabel = 'X Axis',  ylabel = 'Y Axis', zlabel = 'Z Axis'):
+
+
+def scatter_to_surface(x, y, z, title = "Surface plot", xlabel = 'X Axis',  ylabel = 'Y Axis', zlabel = 'Z Axis', colors = "YlGnBu"):
     # Create a 3D figure
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
@@ -172,7 +194,7 @@ def scatter_to_surface(x, y, z, title = "Surface plot", xlabel = 'X Axis',  ylab
     zi = griddata((x, y), z, (xi, yi), method='cubic')
 
     # Create the surface plot
-    ax.plot_surface(xi, yi, zi, cmap='viridis')
+    ax.plot_surface(xi, yi, zi, cmap=colors)
 
     # Set labels for the axes
     ax.set_xlabel(xlabel)

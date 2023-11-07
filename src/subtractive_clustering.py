@@ -125,7 +125,7 @@ class SubtractiveClustering:
         
         return False
 
-    def cluster(self, data: np.array) -> dict:
+    def cluster(self, data: np.array, show: bool = True) -> dict:
         """
         Perform mountain clustering on the data points.
 
@@ -138,8 +138,8 @@ class SubtractiveClustering:
         """
         center, D = self.select_center(data)
         self.centers.append(center)
-
-        scatter_to_surface(data[:, 0], data[:, 1], D, title = "Subtractive Density Measure")
+        if show:
+            scatter_to_surface(data[:, 0], data[:, 1], D, title = "Subtractive Density Measure")
         iteration_count = 0
 
         while True and iteration_count < self.max_iterations:
@@ -152,8 +152,17 @@ class SubtractiveClustering:
             else:
                 self.centers.append(center)
                 D = D_new
-                scatter_to_surface(data[:, 0], data[:, 1], D, title = "Subtractive Density Measure revised without center "+str(center))
+                if show:
+                    scatter_to_surface(data[:, 0], data[:, 1], D, title = "Subtractive Density Measure revised without center "+str(center))
             iteration_count += 1
         print(self.centers)
         clusters = self.assign_to_centers(data)
-        return clusters
+        
+        new_clusters = {}
+
+        for cluster_center, points in clusters.items():
+            cluster_name = f'cluster {cluster_center}'
+            center = data[cluster_center].tolist()
+            new_clusters[cluster_name] = {'center': np.array(center), 'points': np.array(points)}
+
+        return new_clusters

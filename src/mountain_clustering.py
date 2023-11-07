@@ -1,9 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from scipy.interpolate import griddata
 from plotting import scatter_to_surface
-
-
 
 class MountainClustering:
     def __init__(self, sigma: float = 0.5, beta: float = 0.625, max_iterations: int = 100, centers: np.array = None):
@@ -121,7 +117,7 @@ class MountainClustering:
         return clusters
     
 
-    def cluster(self, data: np.array, G: np.array) -> dict:
+    def cluster(self, data: np.array, G: np.array, show: bool = True) -> dict:
         """
         Perform mountain clustering on the data points.
 
@@ -134,7 +130,8 @@ class MountainClustering:
         """
         center, mv = self.select_center(data, G)
         self.centers.append(center)
-        scatter_to_surface(G[:, 0], G[:, 1], mv, title = "Mountain Function")
+        if show:
+            scatter_to_surface(G[:, 0], G[:, 1], mv, title = "Mountain Function")
         iteration_count = 0
 
         while True and iteration_count < self.max_iterations:
@@ -143,8 +140,18 @@ class MountainClustering:
                 break
             else:
                 self.centers.append(center)
-                scatter_to_surface(G[:, 0], G[:, 1], mv, title = "Mountain Function revised without center "+str(center))
+                if show:
+                    scatter_to_surface(G[:, 0], G[:, 1], mv, title = "Mountain Function revised without center "+str(center))
             iteration_count += 1
 
         clusters = self.assign_to_centers(data, G, self.centers, sigma=self.sigma)
-        return clusters
+
+    
+        new_clusters = {}
+
+        for cluster_center, points in clusters.items():
+            cluster_name = f'cluster {cluster_center}'
+            center = G[cluster_center]
+            new_clusters[cluster_name] = {'center': np.array(center), 'points': np.array(points)}
+
+        return new_clusters
