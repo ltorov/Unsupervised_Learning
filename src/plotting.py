@@ -158,17 +158,26 @@ def scatter_clusters(data, clusters, title = "Clusters", palette="YlGnBu", x_lab
 
     figsize=(10, 6)
     fig = plt.figure(figsize=figsize)
-    ax = fig.add_subplot(111, projection='3d')
+    
 
     colors = sns.color_palette(palette, len(clusters))
     points = [clusters[cluster]['points'] for cluster in clusters.keys()]
 
-    for id_color, point in enumerate(points):
+    if data.shape[1]>2:
+        ax = fig.add_subplot(111, projection='3d')
 
-        ax.scatter(data[point][:, axis[0]], data[point][:, axis[1]], data[point][:, axis[2]], color=colors[id_color], marker='o', label=id_color)
-    ax.set_xlabel(x_label)
-    ax.set_ylabel(y_label)
-    ax.set_zlabel(z_label)
+        for id_color, point in enumerate(points):
+
+            ax.scatter(data[point][:, axis[0]], data[point][:, axis[1]], data[point][:, axis[2]], color=colors[id_color], marker='o', label=id_color)
+        ax.set_xlabel(x_label)
+        ax.set_ylabel(y_label)
+        ax.set_zlabel(z_label)
+    elif data.shape[1] == 2:
+        for id_color, point in enumerate(points):
+            plt.scatter(data[point][:, axis[0]], data[point][:, axis[1]], color=colors[id_color], marker='o', label=id_color)
+        plt.xlabel(x_label)
+        plt.ylabel(y_label)
+
 
     if return_figure:
         return fig

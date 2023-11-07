@@ -40,7 +40,6 @@ class SpectralClustering:
         min_eigenvalues = np.argsort(eigenvalues)
         
         self.centers = min_eigenvalues[:self.k]
-        print(self.centers)
 
         kmeans = KMeansClustering(k = self.k)
         clusters = kmeans.cluster(eigenvectors[:, min_eigenvalues[:self.k]])

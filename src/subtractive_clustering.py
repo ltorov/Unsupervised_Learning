@@ -155,7 +155,6 @@ class SubtractiveClustering:
                 if show:
                     scatter_to_surface(data[:, 0], data[:, 1], D, title = "Subtractive Density Measure revised without center "+str(center))
             iteration_count += 1
-        print(self.centers)
         clusters = self.assign_to_centers(data)
         
         new_clusters = {}

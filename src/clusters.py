@@ -2,6 +2,46 @@ import numpy as np
 import itertools
 from typing import Dict, List
 
+from sklearn.metrics import silhouette_score,  davies_bouldin_score, calinski_harabasz_score, adjusted_rand_score, normalized_mutual_info_score,fowlkes_mallows_score
+
+def intra_cluster_indices(data, clusters, show = True):
+    labels = np.zeros(len(data))
+
+    for idx, cluster in enumerate(clusters.values()):
+        labels[cluster['points']] = idx
+        
+    silhoutte = silhouette_score(data, labels)
+    davies_bouldin = davies_bouldin_score(data, labels)
+    calinski_harabasz = calinski_harabasz_score(data, labels)
+    
+    if show:
+        print("Silhoutte Score : ", silhoutte)
+        print("Davies Bouldin Score : ", davies_bouldin)
+        print("Calinski Harabasz Score : ", calinski_harabasz)
+
+    return [silhoutte, davies_bouldin, calinski_harabasz]
+
+def extra_cluster_indices(data, clusters, target_clusters, show = True):
+    labels = np.zeros(len(data))
+
+    for idx, cluster in enumerate(clusters.values()):
+        labels[cluster['points']] = idx
+
+    target_labels = np.zeros(len(data))
+
+    for idx, cluster in enumerate(target_clusters.values()):
+        target_labels[cluster['points']] = idx
+
+    ari = adjusted_rand_score(target_labels, labels)
+    nmi = normalized_mutual_info_score(target_labels, labels)
+    fmi = fowlkes_mallows_score(target_labels, labels)
+
+    if show:
+        print("Adjusted Rand Index : ", ari)
+        print("Normalized Mutual Information : ", nmi)
+        print("Fowlkes-Mallows Index : ", fmi)
+    return [ari, nmi, fmi]
+
 def grid(dim: int, size: float, a: float = 0, b: float = 1) -> np.ndarray:
     """
     Divide a data points into grids based on the distance to other data points.
