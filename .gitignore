@@ -1,0 +1,7 @@
+
+venv/lib/python3.11/site-packages/wheel/vendored/packaging/__pycache__/specifiers.cpython-311.pyc
+*.pyc
+*.js
+*.svg
+*.png
+*.png
