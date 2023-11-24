@@ -1,5 +1,5 @@
 import numpy as np
-from plotting import scatter_to_surface
+from src.plotting import scatter_to_surface
 
 class MountainClustering:
     def __init__(self, sigma: float = 0.5, beta: float = None, max_iterations: int = 100, centers: np.array = None, metric = 2):

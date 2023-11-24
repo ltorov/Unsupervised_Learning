@@ -3,16 +3,16 @@ def main(path, plotting = True, metric = 'euclidean', clusters = 3, categorical 
     import umap
 
     # Import my own methods
-    from distances import distance, sort_distances
-    from plotting import immersive_scatter, scatter_clusters, scatter, heatmap, surface, scatter_to_surface
-    from clusters import grid, boxes, box_clusters, neighbors, similarity_index, intra_cluster_indices, extra_cluster_indices
-    from auxiliary import normalize, read, one_hot_encoding, Autoencoder, clusters_structure
+    from src.distances import distance, sort_distances
+    from src.plotting import immersive_scatter, scatter_clusters, scatter, heatmap, surface, scatter_to_surface
+    from src.clusters import grid, boxes, box_clusters, neighbors, similarity_index, intra_cluster_indices, extra_cluster_indices
+    from src.auxiliary import normalize, read, one_hot_encoding, Autoencoder, clusters_structure
     from main import main
-    from mountain_clustering import MountainClustering
-    from subtractive_clustering import SubtractiveClustering
-    from kmeans_clustering import KMeansClustering
-    from fuzzycmeans_clustering import FuzzyCMeansClustering
-    from spectral_clustering import SpectralClustering
+    from src.mountain_clustering import MountainClustering
+    from src.subtractive_clustering import SubtractiveClustering
+    from src.kmeans_clustering import KMeansClustering
+    from src.fuzzycmeans_clustering import FuzzyCMeansClustering
+    from src.spectral_clustering import SpectralClustering
 
     # Read the data as a np.array from the path specified
     data = read(path)
@@ -149,16 +149,16 @@ if __name__ == "__main__":
     import umap
 
     # Import my own methods
-    from distances import distance, sort_distances
-    from plotting import immersive_scatter, scatter_clusters, scatter, heatmap, surface, scatter_to_surface
-    from clusters import grid, boxes, box_clusters, neighbors, similarity_index, intra_cluster_indices, extra_cluster_indices
-    from auxiliary import normalize, read, one_hot_encoding, Autoencoder, clusters_structure
+    from src.distances import distance, sort_distances
+    from src.plotting import immersive_scatter, scatter_clusters, scatter, heatmap, surface, scatter_to_surface
+    from src.clusters import grid, boxes, box_clusters, neighbors, similarity_index, intra_cluster_indices, extra_cluster_indices
+    from src.auxiliary import normalize, read, one_hot_encoding, Autoencoder, clusters_structure
     from main import main
-    from mountain_clustering import MountainClustering
-    from subtractive_clustering import SubtractiveClustering
-    from kmeans_clustering import KMeansClustering
-    from fuzzycmeans_clustering import FuzzyCMeansClustering
-    from spectral_clustering import SpectralClustering
+    from src.mountain_clustering import MountainClustering
+    from src.subtractive_clustering import SubtractiveClustering
+    from src.kmeans_clustering import KMeansClustering
+    from src.fuzzycmeans_clustering import FuzzyCMeansClustering
+    from src.spectral_clustering import SpectralClustering
 
     path = 'data/iris.csv'
     Clusters = main(path, plotting = True, metric = 'euclidean')

@@ -1,6 +1,6 @@
 import numpy as np
 import random
-from distances import distance, sort_distances
+from src.distances import distance, sort_distances
 
 class KMeansClustering:
     def __init__(self, k: int, centers: np.array = None, max_iterations: int = 100, epsilon: float = 0.45, metric = 2):

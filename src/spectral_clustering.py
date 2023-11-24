@@ -1,6 +1,6 @@
-from kmeans_clustering import KMeansClustering
+from src.kmeans_clustering import KMeansClustering
 import numpy as np
-from distances import distance, sort_distances
+from src.distances import distance, sort_distances
 class SpectralClustering:
     def __init__(self, k: int,  max_iterations: int = 100, sigma: float = 0.05, metric = 2):
         """

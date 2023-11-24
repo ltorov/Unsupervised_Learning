@@ -1,5 +1,5 @@
 import numpy as np
-from plotting import scatter_to_surface
+from src.plotting import scatter_to_surface
 
 class SubtractiveClustering:
     def __init__(self, alpha_radius: float = 0.5, beta_radius: float = None, max_iterations: int = 100, centers: np.array = None, metric = 2):
