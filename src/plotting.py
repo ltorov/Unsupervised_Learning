@@ -76,7 +76,7 @@ def scatter(data, title = "Scatter plot for data"):
     # Save plot to results folder
     save_plot(plt, title)
 
-def heatmap(D, title = "Heatmap of Distance Matrix", sorted = False):
+def heatmap(D, title = "Heatmap of Distance Matrix", sorted = False, colors ="YlGnBu"):
     if sorted:
         # Flatten the matrix into a 1D array, preserving the original indices
         flattened_matrix = D.flatten()
@@ -91,7 +91,7 @@ def heatmap(D, title = "Heatmap of Distance Matrix", sorted = False):
         D = sorted_matrix.reshape(D.shape)
     # Create a heatmap using seaborn
     plt.figure(figsize=(8, 6))
-    sns.heatmap(D, cmap="YlGnBu")
+    sns.heatmap(D, cmap=colors)
 
     # Add labels and title
     plt.title(title)
@@ -101,7 +101,7 @@ def heatmap(D, title = "Heatmap of Distance Matrix", sorted = False):
     # Save plot to results folder
     save_plot(plt, title)
 
-def surface(D, title= 'Surface plot of Distance Matrix'):
+def surface(D, title= 'Surface plot of Distance Matrix', colors ="YlGnBu"):
     # Create x, y coordinates based on the shape of D
     x = np.arange(D.shape[0])
     y = np.arange(D.shape[1])
@@ -115,7 +115,7 @@ def surface(D, title= 'Surface plot of Distance Matrix'):
     z = D.flatten()
 
     # Plot the 3D surface
-    surf = ax.plot_surface(x, y, D, cmap="YlGnBu")
+    surf = ax.plot_surface(x, y, D, cmap=colors)
 
     # Set labels for the axes
     ax.set_xlabel('X Axis')
