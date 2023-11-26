@@ -12,9 +12,6 @@ I just used a template for ChatGPT haven't really worked on it yet
 - [Methods](#methods)
   - [read(path)](#readpath)
   - [normalize(data)](#normalizedata)
-- [Examples](#examples)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Getting Started
 
@@ -30,40 +27,9 @@ Before using this project, make sure you have the following prerequisites:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/yourusername/yourproject.git
+   gh repo clone ltorov/Unsupervised_Learning
    ```
 
-2. Navigate to the project directory:
-
-   ```bash
-   cd yourproject
-   ```
-
-3. Create a virtual environment (optional but recommended):
-
-   ```bash
-   python -m venv venv
-   ```
-
-4. Activate the virtual environment (skip if not using a virtual environment):
-
-   - On Windows:
-
-     ```bash
-     venv\Scripts\activate
-     ```
-
-   - On macOS and Linux:
-
-     ```bash
-     source venv/bin/activate
-     ```
-
-5. Install the required packages:
-
-   ```bash
-   pip install -r requirements/requirements.txt
-   ```
 
 ## Usage
 
