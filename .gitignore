@@ -1,2 +1,5 @@
 
 results/.DS_Store
+*.pyc
+.DS_Store
+.DS_Store
