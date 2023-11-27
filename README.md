@@ -1,96 +1,36 @@
 # Unsupervised Methods
+##Overview
 
-**Project Description**: 
-I just used a template for ChatGPT haven't really worked on it yet
+This project explores various clustering techniques and dimensionality reduction methods applied to a given dataset. The main script, main.py, provides a modularized approach to analyzing and visualizing data. The script includes functionalities for data preprocessing, distance matrix calculation, clustering, and embedding techniques.
 
-## Table of Contents
+##Requirements
 
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [Methods](#methods)
-  - [read(path)](#readpath)
-  - [normalize(data)](#normalizedata)
+Python 3.x
+Virtual environment (venv)
+Packages listed in requirements.txt
 
-## Getting Started
+##Usage
 
-### Prerequisites
+To run the main script and generate clusters:
 
-Before using this project, make sure you have the following prerequisites:
-
-- Python (version 3.6 or higher)
-- pip (Python package manager)
-
-### Installation
-
-1. Clone the repository to your local machine:
-
-   ```bash
-   gh repo clone ltorov/Unsupervised_Learning
-   ```
-
-
-## Usage
-
-To use the project's methods and utilities, you can import them into your Python code. Here's how to use some of the key methods:
-
-```python
-from yourproject import read, normalize, main
-
-# Example usage of the 'read' method
-data = read('data/yourdata.csv')
-
-# Example usage of the 'normalize' method
-normalized_data = normalize(data)
-
-# Example usage of the 'main' method
-path = 'data/iris.csv'
-main(path, plotting=False)
 ```
+python main.py
 
-For more details on each method, please refer to the [Methods](#methods) section below.
-
-## Methods
-
-### `read(path: str) -> numpy.ndarray`
-
-Reads data from a file into a NumPy array.
-
-- Parameters:
-  - `path` (str): The path to the input file.
-
-- Returns:
-  - numpy.ndarray or None: The data as a NumPy array, or None if an error occurs.
-
-### `normalize(data: numpy.ndarray) -> numpy.ndarray`
-
-Normalizes a NumPy array by scaling values between 0 and 1.
-
-- Parameters:
-  - `data` (numpy.ndarray): The input data as a NumPy array.
-
-- Returns:
-  - numpy.ndarray: The normalized data.
+```
+Parameters
+path: Path to the dataset file.
+plotting: Boolean flag to enable/disable plotting (default is True).
+metric: Distance metric for clustering (default is 'euclidean').
+clusters: Number of clusters for certain methods (default is 3).
+categorical: List of categorical variables for one-hot-encoding (default is None).
 
 
-### `main(path: str, plotting: bool = True, metric: str = 'euclidean')`
+The script performs the following steps:
 
-The main function of the project, which performs various data analysis and visualization tasks. It reads data, normalizes it, calculates distances, and plots the results.
+Data Preprocessing: Reads data from the specified path and performs normalization. If categorical variables are present, it uses one-hot-encoding.
+Visualization: Plots the normalized data in a hypercube and generates a heatmap and surface plot of the distance matrix.
+Clustering Techniques: Applies various clustering techniques (Mountain Clustering, Subtractive Clustering, K-Means, Fuzzy C-Means, Spectral Clustering) on different embeddings (Autoencoder, UMAP) and distance metrics.
+Virtual Environment Setup: The script automatically creates a virtual environment, installs necessary dependencies from requirements.txt, and displays the location of the created environment.
+Additional Information
 
-- Parameters:
-  - `path` (str): The path to the data file.
-  - `plotting` (bool, optional): Whether to enable plotting (default is True).
-  - `metric` (str, optional): The distance metric to use (default is 'euclidean').
-
-## Examples
-
-You can find examples of how to use the methods in the code and comments within the project files. For detailed examples, please refer to the code in the project directory.
-
-## Contributing
-
-If you would like to contribute to this project, please follow our [contribution guidelines](CONTRIBUTING.md).
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+For more details on the methods used and custom modules, refer to the respective files in the src directory.
