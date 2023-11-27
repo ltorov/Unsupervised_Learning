@@ -1,15 +1,15 @@
 # Unsupervised Methods
-##Overview
+## Overview
 
 This project explores various clustering techniques and dimensionality reduction methods applied to a given dataset. The main script, main.py, provides a modularized approach to analyzing and visualizing data. The script includes functionalities for data preprocessing, distance matrix calculation, clustering, and embedding techniques.
 
-##Requirements
+## Requirements
 
 Python 3.x
 Virtual environment (venv)
 Packages listed in requirements.txt
 
-##Usage
+## Usage
 
 To run the main script and generate clusters:
 
@@ -17,7 +17,7 @@ To run the main script and generate clusters:
 python main.py
 
 ```
-Parameters
+## Parameters
 path: Path to the dataset file.
 plotting: Boolean flag to enable/disable plotting (default is True).
 metric: Distance metric for clustering (default is 'euclidean').
